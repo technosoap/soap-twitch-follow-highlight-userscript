@@ -8,6 +8,10 @@
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=twitch.tv
 // @grant        GM_addStyle
 // ==/UserScript==
+//
+// TODO should run it on streamer pages too (rather than just twitch homepage),
+// e.g. https://www.twitch.tv/oldtimeycomputershow ,
+// https://www.twitch.tv/oldtimeycomputershow/videos
 
 (function() {
     'use strict';
