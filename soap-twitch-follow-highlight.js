@@ -15,7 +15,10 @@
     GM_addStyle('.soap-twitch-follow-highlight-gray { color: gray !important; }');
     GM_addStyle('.soap-twitch-follow-highlight-lime { color: lime !important; }');
 
-    // The long term plan is that this JSON would be stored in local storage and modified by some sort of configuration interface. For now, we hard-code it.
+    // The long term plan is that this JSON would be stored in local storage and
+    // modified by some sort of configuration interface. For now, we hard-code
+    // it.
+    //
     // assumption: trusted input
     //
     // TODO validate that colours here have a corresponding soap-twitch-follow-highlight-* class.
