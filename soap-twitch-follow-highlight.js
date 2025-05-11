@@ -4,14 +4,10 @@
 // @version      2025-04-28
 // @description  Selectively change text color in twitch.tv "Followed Channels" sidebar.
 // @author       Technosoap
-// @match        https://www.twitch.tv/
+// @match        https://www.twitch.tv/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=twitch.tv
 // @grant        GM_addStyle
 // ==/UserScript==
-//
-// TODO should run it on streamer pages too (rather than just twitch homepage),
-// e.g. https://www.twitch.tv/oldtimeycomputershow ,
-// https://www.twitch.tv/oldtimeycomputershow/videos
 //
 // TODO the config is using human-friendly twitch channel handles (e.g.
 // "OldTimeyComputerShow"). Handles can change, so ideally we would be using
