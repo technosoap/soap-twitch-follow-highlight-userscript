@@ -1,36 +1,45 @@
 // ==UserScript==
-// @name         soap-twitch-follow-highlight
+// @name         Twitch Followed Channels Color Customizer
 // @namespace    http://tampermonkey.net/
-// @version      2025-04-28
-// @description  Selectively change text color in twitch.tv "Followed Channels" sidebar.
+// @version      2025-05-11
+// @description  Custom highlighting for selected "Followed Channels" in twitch.tv sidebar.
 // @author       Technosoap
+// @license      MIT
 // @match        https://www.twitch.tv/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=twitch.tv
 // @grant        GM_addStyle
 // ==/UserScript==
 //
-// TODO the config is using human-friendly twitch channel handles (e.g.
-// "OldTimeyComputerShow"). Handles can change, so ideally we would be using
-// something immutable like the channel ID, but AFAICT that requires an API
-// call. Not worth the faff right now.
+// INSTRUCTIONS FOR USERS: modify the `userConfigJson` below to add or remove
+// the channels you want to highlight. For example add the line:
+//
+//     "MyFavouriteStreamer": "lime",
+//
+// to highlight MyFavouriteStreamer with a lime-green color.
+//
+// If you want to add more colors, be sure to add another `GM_addStyle` line
+// too.
 
 (function() {
     'use strict';
 
-    GM_addStyle('.soap-twitch-follow-highlight-gray { color: gray !important; }');
-    GM_addStyle('.soap-twitch-follow-highlight-lime { color: lime !important; }');
+    GM_addStyle('.twitch-followed-channels-color-customizer-userscript-highlight-gray { color: gray !important; }');
+    GM_addStyle('.twitch-followed-channels-color-customizer-userscript-highlight-lime { color: lime !important; }');
 
     // The long term plan is that this JSON would be stored in local storage and
     // modified by some sort of configuration interface. For now, we hard-code
     // it.
     //
-    // assumption: trusted input
+    // TODO validate that colors here have a corresponding
+    // twitch-followed-channels-color-customizer-userscript-highlight-* class.
     //
-    // TODO validate that colours here have a corresponding soap-twitch-follow-highlight-* class.
+    // TODO the config is using human-friendly twitch channel handles (e.g.
+    // "OldTimeyComputerShow"). Handles can change, so ideally we would be using
+    // something immutable like the channel ID, but AFAICT that requires an API
+    // call. Not worth the faff right now.
     const userConfigJson = `{"highlights": {
-       "GiantBombForever": "gray",
-       "OldTimeyComputerShow": "lime",
-       "WonderlandRogue": "lime"}}`;
+       "OldTimeyComputerShow": "gray",
+       "PirateSoftware": "lime"}}`;
 
     // Revive with Object.create(null), to avoid issues of a namespace collision
     // between Object's prototype and twitch users (imagine a twitch streamer
@@ -65,7 +74,7 @@
             const handle = titleElem.firstElementChild.title;
             const highlightColor = userConfig.highlights[handle];
             if (highlightColor) {
-                titleElem.firstElementChild.classList.toggle(`soap-twitch-follow-highlight-${highlightColor}`, true);
+                titleElem.firstElementChild.classList.toggle(`twitch-followed-channels-color-customizer-userscript-highlight-${highlightColor}`, true);
             }
         }
     };
