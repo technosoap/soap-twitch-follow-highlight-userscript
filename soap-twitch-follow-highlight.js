@@ -12,6 +12,11 @@
 // TODO should run it on streamer pages too (rather than just twitch homepage),
 // e.g. https://www.twitch.tv/oldtimeycomputershow ,
 // https://www.twitch.tv/oldtimeycomputershow/videos
+//
+// TODO the config is using human-friendly twitch channel handles (e.g.
+// "OldTimeyComputerShow"). Handles can change, so ideally we would be using
+// something immutable like the channel ID, but AFAICT that requires an API
+// call. Not worth the faff right now.
 
 (function() {
     'use strict';
