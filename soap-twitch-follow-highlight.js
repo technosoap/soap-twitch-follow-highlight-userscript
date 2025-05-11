@@ -46,7 +46,22 @@
         return value;
     });
 
+    const findFollowedChannelsDiv = function() {
+        const followedChannelsDiv = document.querySelector(`div[aria-label="Followed Channels"]`);
+        if (followedChannelsDiv) {
+            let observerTimer = 0;
+            const observer = new ResizeObserver((entries) => {
+                // debouncing
+                clearTimeout(observerTimer);
+                observerTimer = setTimeout(changeColor, 100);
+            }).observe(followedChannelsDiv);
+            clearInterval(findFollowedChannelsDivInterval);
+        }
+    }
+    const findFollowedChannelsDivInterval = setInterval(findFollowedChannelsDiv, 1000);
+
     const changeColor = function() {
+        // TODO getElementsByClassName on just the children of followedChannelsDiv?
         for (const titleElem of document.getElementsByClassName("side-nav-card__title")) {
             const handle = titleElem.firstElementChild.title;
             const highlightColor = userConfig.highlights[handle];
@@ -55,9 +70,4 @@
             }
         }
     };
-
-    // TODO inefficient but simple. Consider
-    // https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver
-    setInterval(changeColor, 1000);
-
 })();
