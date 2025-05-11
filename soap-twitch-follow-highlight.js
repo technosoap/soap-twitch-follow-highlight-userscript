@@ -53,16 +53,15 @@
             const observer = new ResizeObserver((entries) => {
                 // debouncing
                 clearTimeout(observerTimer);
-                observerTimer = setTimeout(changeColor, 100);
+                observerTimer = setTimeout(changeColor, 100, followedChannelsDiv);
             }).observe(followedChannelsDiv);
             clearInterval(findFollowedChannelsDivInterval);
         }
     }
     const findFollowedChannelsDivInterval = setInterval(findFollowedChannelsDiv, 1000);
 
-    const changeColor = function() {
-        // TODO getElementsByClassName on just the children of followedChannelsDiv?
-        for (const titleElem of document.getElementsByClassName("side-nav-card__title")) {
+    const changeColor = function(followedChannelsDiv) {
+        for (const titleElem of followedChannelsDiv.getElementsByClassName("side-nav-card__title")) {
             const handle = titleElem.firstElementChild.title;
             const highlightColor = userConfig.highlights[handle];
             if (highlightColor) {
