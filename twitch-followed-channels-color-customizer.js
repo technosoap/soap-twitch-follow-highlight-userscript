@@ -1,13 +1,13 @@
 // ==UserScript==
 // @name         Twitch Followed Channels Color Customizer
 // @namespace    http://tampermonkey.net/
-// @version      2025-05-11
+// @version      2025-05-11T18-13
 // @description  Custom highlighting for selected "Followed Channels" in twitch.tv sidebar.
 // @author       Technosoap
 // @license      MIT
 // @match        https://www.twitch.tv/*
 // @icon         https://www.google.com/s2/favicons?sz=64&domain=twitch.tv
-// @grant        GM_addStyle
+// @grant        none
 // ==/UserScript==
 //
 // INSTRUCTIONS FOR USERS: modify the `userConfigJson` below to add or remove
@@ -23,8 +23,20 @@
 (function() {
     'use strict';
 
-    GM_addStyle('.twitch-followed-channels-color-customizer-userscript-highlight-gray { color: gray !important; }');
-    GM_addStyle('.twitch-followed-channels-color-customizer-userscript-highlight-lime { color: lime !important; }');
+    const addStyle = function(cssText) {
+      let head = document.getElementsByTagName('head')[0];
+      if (head) {
+        let style = document.createElement('style');
+        style.setAttribute('type', 'text/css');
+        style.textContent = cssText;
+        head.appendChild(style);
+        return style;
+      }
+      return null;
+    };
+
+    addStyle('p.twitch-followed-channels-color-customizer-userscript-highlight-gray { color: gray !important; }');
+    addStyle('p.twitch-followed-channels-color-customizer-userscript-highlight-lime { color: lime !important; }');
 
     // The long term plan is that this JSON would be stored in local storage and
     // modified by some sort of configuration interface. For now, we hard-code
