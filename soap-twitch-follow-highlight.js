@@ -27,7 +27,10 @@
     // assumption: trusted input
     //
     // TODO validate that colours here have a corresponding soap-twitch-follow-highlight-* class.
-    const userConfigJson = '{"highlights": {"GiantBombForever": "gray", "OldTimeyComputerShow": "gray", "WonderlandRogue": "lime"}}';
+    const userConfigJson = `{"highlights": {
+       "GiantBombForever": "gray",
+       "OldTimeyComputerShow": "lime",
+       "WonderlandRogue": "lime"}}`;
 
     // Revive with Object.create(null), to avoid issues of a namespace collision
     // between Object's prototype and twitch users (imagine a twitch streamer
